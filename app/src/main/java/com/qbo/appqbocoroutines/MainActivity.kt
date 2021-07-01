@@ -3,17 +3,19 @@ package com.qbo.appqbocoroutines
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //realiza un seguimiento de cualquier corrutina que crea mediante los elementos launch o async.
+        //Creamos la corrutina indicando el ámbito, lanzador y el despachador
+
         GlobalScope.launch(Dispatchers.Main) {
+            //withContext, es una función suspendida
+            //que ejecuta el código en un subproceso IO
             val resultado = withContext(Dispatchers.IO){
                 ProveedorDeDatos.TareaPesada()
             }
